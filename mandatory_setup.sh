@@ -21,7 +21,8 @@ sed -i "s/PASS_MAX_DAYS.*/PASS_MAX_DAYS	30/" /etc/login.defs
 sed -i "s/PASS_MIN_DAYS.*/PASS_MIN_DAYS	2/" /etc/login.defs
 sed -i "s/PASS_WARN_AGE.*/PASS_WARN_AGE	7/" /etc/login.defs
 
-echo "password	requisite	pam_pwquality.so	enforce_for_root minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxsequence=3 usercheck=1 difok=7" >> /etc/pam.d/common-password
+apt install libpam-pwquality
+echo "password	requisite	pam_pwquality.so	enforce_for_root minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxsequence=3 usercheck=1 difok=7" > /etc/pam.d/b2br-password
 
 apt install ufw
 ufw allow 4242
