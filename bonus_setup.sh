@@ -4,28 +4,28 @@ echo "----setup var lv----"
 lvcreate -L 3G -n var $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/var
 mkdir /mnt/var && mount /dev/$vg_oldname/var /mnt/var
-mv -r /var/* /mnt/var && umount /mnt/var && mount /dev/$vg_oldname/var /var && rm -r /mnt/var
+mv /var/* /mnt/var && mount /dev/$vg_oldname/var /var
 echo "/dev/$vg_oldname/var	/var	ext4	defaults	0	2" >> /etc/fstab
 
 echo "----setup srv lv-----"
 lvcreate -L 3G -n srv $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/srv
 mkdir /mnt/srv && mount /dev/$vg_oldname/srv /mnt/srv
-mv -r /srv/* /mnt/srv && umount /mnt/srv && mount /dev/$vg_oldname/srv /srv && rm -r /mnt/srv
+mv /srv/* /mnt/srv && mount /dev/$vg_oldname/srv /srv
 echo "/dev/$vg_oldname/srv	/srv	ext4	defaults	0	2" >> /etc/fstab
 
 echo "----setup tmp lv-----"
 lvcreate -L 3G -n tmp $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/tmp
 mkdir /mnt/tmp && mount /dev/$vg_oldname/tmp /mnt/tmp
-mv -r /tmp/* /mnt/tmp && umount /mnt/tmp && mount /dev/$vg_oldname/tmp /tmp && rm -r /mnt/tmp
+mv /tmp/* /mnt/tmp && mount /dev/$vg_oldname/tmp /tmp 
 echo "/dev/$vg_oldname/tmp	/tmp	ext4	defaults	0	2" >> /etc/fstab
 
 echo "----setup var/log lv----"
 lvcreate -L 3G -n var-log $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/var-log
 mkdir /mnt/varlog && mount /dev/$vg_oldname/var-log /mnt/varlog
-mv /var/log/* /mnt/varlog && umount /mnt/varlog && mount /dev/$vg_oldname/var-log /var/log && rm -r /mnt/varlog
+mv /var/log/* /mnt/varlog && mount /dev/$vg_oldname/var-log /var/log
 echo "/dev/$vg_oldname/var-log	/var/log	ext4	defaults	0	2" >> /etc/fstab
 
 echo "extend /home / SWAP"
