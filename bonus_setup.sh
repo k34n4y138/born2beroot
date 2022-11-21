@@ -61,4 +61,5 @@ sed -i "s/$vg_oldname/LVMGroup/g" /boot/grub/grub.cfg
 sed -i "s/swap_1/swap/g" /boot/grub/grub.cfg
 sed -i "s/$mapper_oldvgname/LVMGroup/g" /boot/grub/grub.cfg
 echo "RESUME=/dev/mapper/LVMGroup-swap" > /etc/initramfs-tools/conf.d/resume
-update-initramfs -u 
+update-initramfs -u
+systemctl daemon-reload
