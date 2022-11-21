@@ -10,7 +10,7 @@ echo "/dev/$vg_oldname/var	/var	ext4	defaults	0	2" >> /etc/fstab
 echo "----setup srv lv-----"
 lvcreate -L 3G -n srv $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/srv
-mkdir /mnt/var && mount /dev/$vg_oldname/srv /mnt/srv
+mkdir /mnt/srv && mount /dev/$vg_oldname/srv /mnt/srv
 cp /srv/* /mnt/srv && umount /mnt/srv && mount /dev/$vg_oldname/srv /srv && rm -r /mnt/srv
 echo "/dev/$vg_oldname/srv	/srv	ext4	defaults	0	2" >> /etc/fstab
 
