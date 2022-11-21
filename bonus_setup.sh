@@ -1,5 +1,5 @@
-vg_oldname=debian-vg
-mapper__oldvgname=debian--vg
+vg_oldname=$(vgdisplay | grep "VG Name" | awk '{printf "%s", $3}')
+mapper_oldvgname=$($vg_oldname | sed "s/-/--/g")
 echo "----setup var lv----"
 lvcreate -L 3G -n var $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/var
@@ -47,7 +47,9 @@ lvrename $vg_oldname swap_1 swap
 vgrename $vg_oldname LVMGroup
 sed -i "s/$vg_oldname/LVMGroup/g" /etc/fstab
 sed -i "s/$mapper_oldvgname/LVMGroup/g" /etc/fstab
+sed -i "s/swap_1/swap/g" /etc/fstab
 sed -i "s/$vg_oldname/LVMGroup/g" /boot/grub/grub.cfg
+sed -i "s/swap_1/swap/g" /boot/grub/grub.cfg
 sed -i "s/$mapper_oldvgname/LVMGroup/g" /boot/grub/grub.cfg
 echo "RESUME=/dev/mapper/LVMGroup-swap" > /etc/initramfs-tools/conf.d/resume
 update-initramfs -u 
