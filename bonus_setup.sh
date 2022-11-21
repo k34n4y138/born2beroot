@@ -1,5 +1,5 @@
 vg_oldname=$(vgdisplay | grep "VG Name" | awk '{printf "%s", $3}')
-mapper_oldvgname=$($vg_oldname | sed "s/-/--/g")
+mapper_oldvgname=$(echo $vg_oldname | sed "s/-/--/g")
 echo "----setup var lv----"
 lvcreate -L 3G -n var $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/var
@@ -22,7 +22,7 @@ cp /tmp/* /mnt/tmp && umount /mnt/tmp && mount /dev/$vg_oldname/tmp /tmp && rm -
 echo "/dev/$vg_oldname/tmp	/tmp	ext4	defaults	0	2" >> /etc/fstab
 
 echo "----setup var/log lv----"
-lvcreate -L 4G -n var-log $vg_oldname
+lvcreate -L 3G -n var-log $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/var-log
 mkdir /mnt/varlog && mount /dev/$vg_oldname/var-log /mnt/varlog
 cp /var/log/* /mnt/varlog && umount /mnt/varlog && mount /dev/$vg_oldname/var-log /var/log && rm -r /mnt/varlog
@@ -37,7 +37,7 @@ lvextend -L 5G /dev/$vg_oldname/home
 resize2fs /dev/$vg_oldname/home
 
 swapoff /dev/$vg_oldname/swap_1
-lvextend -L 2.5G /dev/$vg_oldname/swap_1
+lvextend -L 2G /dev/$vg_oldname/swap_1
 mkswap /dev/$vg_oldname/swap_1
 swapon /dev/$vg_oldname/swap_1
 
