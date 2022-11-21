@@ -1,5 +1,5 @@
 vg_oldname=debian-vg
-mapper__oldvgname=devian--vg
+mapper__oldvgname=debian--vg
 echo "----setup var lv----"
 lvcreate -L 3G -n var $vg_oldname
 mkfs -t ext4 /dev/$vg_oldname/var
