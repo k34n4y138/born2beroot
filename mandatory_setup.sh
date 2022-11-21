@@ -19,7 +19,7 @@ systemctl restart sshd.service
 
 hst_hld=$(hostname)
 hostnamectl set-hostname zmoumen42
-sed -i "s/$hst_hld/zmoumen42/" /ets/hosts
+sed -i "s/$hst_hld/zmoumen42/" /etc/hosts
 
 
 sed -i "s/PASS_MAX_DAYS.*/PASS_MAX_DAYS	30/" /etc/login.defs
@@ -55,6 +55,7 @@ wget https://raw.githubusercontent.com/k34n4y138/born2beroot/master/monitoring.s
 crontab "*/10 * * * *" /monitoring.sh
 
 clear
+
 lsblk
 
 echo "------------------"
