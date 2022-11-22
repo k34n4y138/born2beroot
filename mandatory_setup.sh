@@ -5,8 +5,6 @@
 apt update
 apt upgrade
 
-adduser zmoumen 2> /dev/null
-
 addgroup user42
 adduser zmoumen user42
 
@@ -15,7 +13,6 @@ apt install ssh -y
 sed -i "s/#Port.*/Port 4242/" /etc/ssh/sshd_config
 sed -i "s/#PermitRootLogin.*/PermitRootLogin no/" /etc/ssh/sshd_config
 systemctl restart sshd.service
-
 
 hst_hld=$(hostname)
 hostnamectl set-hostname zmoumen42
@@ -27,7 +24,11 @@ sed -i "s/PASS_MIN_DAYS.*/PASS_MIN_DAYS	2/" /etc/login.defs
 sed -i "s/PASS_WARN_AGE.*/PASS_WARN_AGE	7/" /etc/login.defs
 
 apt install libpam-pwquality -y
-sed -i "s/pam_pwquality.so.*/pam_pwquality.so	enforce_for_root minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxsequence=3 usercheck=1 difok=7/" /etc/pam.d/common-password
+sed -i "s/pam_pwquality.so.*/pam_pwquality.so	enforce_for_root retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxsequence=3 usercheck=1 difok=7/" /etc/pam.d/common-password
+
+
+echo "138R@@7pa55\n138R@@7pa55" | passwd root
+echo "Zm00HJ^@&ihsg\nZm00HJ^@&ihsg" | passwd zmoumen
 
 apt install ufw -y
 ufw allow 4242
@@ -65,3 +66,8 @@ ufw status
 echo "--------------------"
 
 crontab -l
+
+echo "--------------------"
+
+echo new root password 138R@@7pa55
+echo new zmoumen password Zm00HJ^@&ihsg
