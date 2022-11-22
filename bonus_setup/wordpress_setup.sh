@@ -32,8 +32,10 @@ echo "setuping ftp server"
 useradd wpuser
 adduser wpuser www-data
 chown -R wpuser:www-data /var/www/html
+chmod -R 774 /var/www/html
 ln -s /var/www/html /home/wpuser
 usermod -d /home/wpuser wpuser
+echo -e "$wpuserpw\n$wpuserpw" | passwd wpuser
 
 apt install vsftpd -y
 sed -i "s/#write_enable.*/write_enable=YES/" /etc/vsftpd.conf
@@ -41,6 +43,7 @@ sed -i "s/#chroot_local_user.*/chroot_local_user=YES/" /etc/vsftpd.conf
 echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf
 systemctl restart vsftpd.service
 ufw allow 80
+ufw allow 21
 ufw enable
 clear 
 ufw status 

@@ -71,4 +71,4 @@ clear
 echo \n\n\n"RESULTS:"
 lsblk
 echo \n\n\n
-shutdown -r +1 "system will reboot in 1 min!"
+reboot

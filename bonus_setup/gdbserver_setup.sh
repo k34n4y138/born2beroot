@@ -15,6 +15,8 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 " > /etc/systemd/system/gdbserver.service
+systemctl ebable gdbserver.service
+systemctl start gdbserver.service
 
 ufw allow 7442
 ufw enable

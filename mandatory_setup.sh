@@ -27,8 +27,8 @@ apt install libpam-pwquality -y
 sed -i "s/pam_pwquality.so.*/pam_pwquality.so	enforce_for_root retry=3 minlen=10 ucredit=-1 lcredit=-1 dcredit=-1 maxsequence=3 usercheck=1 difok=7/" /etc/pam.d/common-password
 
 
-echo "138R@@7pa55\n138R@@7pa55" | passwd root
-echo "Zm00HJ^@&ihsg\nZm00HJ^@&ihsg" | passwd zmoumen
+echo -e "138R@@7pa55\n138R@@7pa55" | passwd root
+echo -e "Zm00HJ^@&ihsg\nZm00HJ^@&ihsg" | passwd zmoumen
 
 chage -W 7 -m 2 -M 30 zmoumen
 chage -W 7 -m 2 -M 30 root
@@ -76,3 +76,4 @@ echo "--------------------"
 
 echo "new root password 138R@@7pa55"
 echo "new zmoumen password Zm00HJ^@&ihsg"
+echo "zmoumen's access to sudo won't update till they re-login"
