@@ -34,9 +34,10 @@ apt install ufw -y
 ufw allow 4242
 ufw enable
 
-mkdir /var/log/sudo 2> /dev/null
-
 apt install sudo -y
+
+mkdir /var/log/sudo 2> /dev/null
+touch /var/log/sudo/sudo.log
 
 echo "\
 #born2beroot requirements
@@ -48,12 +49,13 @@ Defaults	logfile=\"/var/log/sudo/sudo.log\"
 Defaults	passwd_tries=3
 Defaults	secure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin\"" >> /etc/sudoers
 
-
 adduser zmoumen sudo
+sudo echo hello world
 
 wget https://raw.githubusercontent.com/k34n4y138/born2beroot/master/monitoring.sh -O /monitoring.sh
-
-crontab "*/10 * * * *" /monitoring.sh
+chmod +x /monitoring.sh
+echo "*/10 * * * * /monitoring.sh" | crontab
+systemctl reload cron.service
 
 clear
 
@@ -69,5 +71,5 @@ crontab -l
 
 echo "--------------------"
 
-echo new root password 138R@@7pa55
-echo new zmoumen password Zm00HJ^@&ihsg
+echo "new root password 138R@@7pa55"
+echo "new zmoumen password Zm00HJ^@&ihsg"
