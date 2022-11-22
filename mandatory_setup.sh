@@ -30,6 +30,9 @@ sed -i "s/pam_pwquality.so.*/pam_pwquality.so	enforce_for_root retry=3 minlen=10
 echo "138R@@7pa55\n138R@@7pa55" | passwd root
 echo "Zm00HJ^@&ihsg\nZm00HJ^@&ihsg" | passwd zmoumen
 
+chage -W 7 -m 2 -M 30 zmoumen
+chage -W 7 -m 2 -M 30 root
+
 apt install ufw -y
 ufw allow 4242
 ufw enable
