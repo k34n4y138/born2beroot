@@ -39,7 +39,7 @@ ufw enable
 
 apt install sudo -y
 
-mkdir /var/log/sudo 2> /dev/null
+mkdir /var/log/sudo
 touch /var/log/sudo/sudo.log
 
 echo "\
